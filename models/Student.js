@@ -6,12 +6,15 @@ import mongoose from "mongoose"
 
 const studentSchema = new mongoose.Schema({
     studentID: String ,
-    name: String,
+    name: {type: String, required: true},
     email: {type: String, unique: true},
     dateOfBirth: Date,
     dateStudentAccountCreated: {type: Date, default: Date.now},
+    course: {
+        courseID: String,
+        courseName: String
+    },
     telephoneNumber: String,
-    courseName: String
 })
 
 export default mongoose.model("Student", studentSchema);   
