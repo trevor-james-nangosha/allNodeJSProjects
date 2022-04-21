@@ -18,3 +18,12 @@ amin.save((error) => {
     }
 })
 //#########################################################################################################
+
+
+//TODO
+//check if mongoDB allows a data type of object,
+// like if you want to have something like this
+//course: {
+//     courseID: "MUK2918",
+//     courseName: "Bachelor of Science in Mechanical Engineering"
+// }

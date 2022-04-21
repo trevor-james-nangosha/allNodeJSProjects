@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/style.css">
+    <title>MUK</title>
+</head>
+<body>
+    <div id="main-body">
+
+        <div id="main-header">
+            <h1>MAKERERE UNIVERSITY</h1>
+            <h3>ENTER YOUR DETAILS BELOW</h3>
+        </div>
+
+        <div id="main-form">
+            <form method="POST" action="http://127.0.0.1:3000/students">
+                <input type="text" name="firstName" required="true" placeholder="First name">
+                <input type="text" name="lastName" required="true" placeholder="Last name">
+                <input type="email" name="email" required="true"  placeholder="Email">
+                <input type="password" name="password" required="true"  placeholder="Enter Password">
+                            
+                <input type="submit" value="SIGN UP">
+                
+            </form>
+        </div>
+    </div>
+    
+    <script src="/src/script.js"></script>
+</body>
+</html>

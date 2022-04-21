@@ -1,20 +1,25 @@
 import mongoose from "mongoose"
-
-// the reason i am using the mongoDB paradigm
-// is because my data is not so structured and i will not
-// need any kind of major relationships between my data instances
+import Course from "./Course.js";
 
 const studentSchema = new mongoose.Schema({
-    studentID: String ,
-    name: {type: String, required: true},
+    studentNumber: {type: String, required: true, unique: true},
+    registrationNumber: {type: String, required: true, unique:true},
+    password: {type: String, required: true, unique: true},
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
     email: {type: String, unique: true},
     dateOfBirth: Date,
+    homeDistrict: String,
+    gender: String,
+    nationality: String,
+    nextOfKin: String,
+    nextOfKinPhoneNumber: String,
+    religion: String,
+    NIN: {type: String},
     dateStudentAccountCreated: {type: Date, default: Date.now},
-    course: {
-        courseID: String,
-        courseName: String
-    },
+    course: {type: mongoose.Schema.Types.ObjectId, ref: Course},
     telephoneNumber: String,
+
 })
 
 export default mongoose.model("Student", studentSchema);   
