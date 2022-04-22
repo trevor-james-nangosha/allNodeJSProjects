@@ -140,18 +140,15 @@ app.post('/students', async (req, res) => {
                 email: email,
                 password: hashedPassword
             })
-            console.log(newStudent)
             newStudent.save((error, student) => {
                 if(!error){
-                    console.log("\nstudent saved.\n")
+                    res.send("student saved.........")
                 }else{
-                    console.log(`\n this is the mongoDB error handling: `)
-                    console.error(`${error}\n`)
+                    console.log(`error`)
                 }
             })
         }).catch((error) => {
-            console.log(`\n this is the promise error handling: `)
-            console.error(`${error}\n`)
+            console.error(`error`)
         })
     } catch (error) {
         console.log(error)
