@@ -13,7 +13,6 @@ import { generateStudentNumber } from "./utilities/utilities.js";
 //how to set up ejs for template rendering
 //look at the mongoDB error codes and how to fix them
 //download the TODO VSCode extension
-//look at the E11000 that is making my mongodb code fail
 
 //defining the consonants
 const app =  express();
@@ -46,7 +45,7 @@ app.get('/', (req, res) => {
     }
 })
 
-app.get('/students', (req, res) => {
+app.get('/v1/students', (req, res) => {
     if(req.session.isAuth){
         Student.find((error, students) => {
             if(!error){
@@ -124,10 +123,7 @@ app.get('/login', (req, res) => {
     }
 })
 
-
-//something is wrong here
-//the student model is not creating and saving the database instance
-app.post('/students', async (req, res) => {
+app.post('/v1/students', async (req, res) => {
     const {password, firstName, lastName, email} = req.body       
     try {
         const salt = await bcrypt.genSalt();
@@ -144,11 +140,11 @@ app.post('/students', async (req, res) => {
                 if(!error){
                     res.send("student saved.........")
                 }else{
-                    console.log(`error`)
+                    console.log(error)
                 }
             })
         }).catch((error) => {
-            console.error(`error`)
+            console.error(error)
         })
     } catch (error) {
         console.log(error)
