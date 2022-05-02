@@ -1,0 +1,166 @@
+AUTHOR: TREVOR JAMES NANGOSHA
+
+-------------------CHAPTER ONE: THE ELEMENTS OF A GOOD API-------------------------------------------------
+
+it is important to note that the success of an API is measured by how quickly developers can get up to speed 
+and start enjoying success using your API
+
+--------------DESIGNING GOOD APIs-----------------------------------------------
+In this article, i am going to be writing about designing the best APIs. most of the concepts will apply to
+RESTFUL APIs but most of them can also apply to other APIs as well.
+
+REST - Representational State Transfer.
+
+any creator of a good API should know that a good API is good at abstraction.
+the users of the API only want to know how to interact with the API, and not how the API works.
+following the naming convention in Clean Code(this book is a must read), API functions should be named well, and they should have no side effects.
+
+in this case,  assume we are not dealing with non-RESTFUL APIs and there is an API called 
+getAdmins(String groupID)to return the admins of a group with the groupID in the parameters.
+this API should only return the admins of the given group and should not have any other side effects like deleting users.
+
+deleting users is a side effect and good APIs do not have side effects. this could probably mean
+that the API was named wrongly.
+
+---------------QUERY STRINGS AND QUERY PARAMETERS--------------------
+get requests, unlike post requests do not have a body object so when working with the get requests, the way to collect data from the user is by using query strings and query parameters
+
+QUERY PARAMETERS
+query parameters are in the form let's say: nangosha/users/:userID
+that userID string in the URL is what we call the query string
+it can be accessed in nodeJS using the req.params.userID command
+
+QUERY STRINGS
+just like query parameters, query strings are also used for collecting data from requests
+i am sure you hae seen them in Google searches.  this is the part that comes after the question mark.
+a URL can have multiple query strings each  separated by an ampersand sign.
+
+for example: nangosha/search?user="nangosha"&tribe="mugishu"
+
+--------FORMAT FOR SENDING DATA-----------------
+when designing APIs, you should use JSON as the defacto standard for sending and receiving data
+this is because it is easier to decode and encode and also supported by many frameworks and developers.
+
+---------NOUNS vs VERBS--------------------------
+the best APIs do not have verbs in their endpoints. the verbs are already described in the HTTP method
+this is a bad API: POST /createPosts
+this is a better API: POST /posts
+
+you should let the HTTP verbs handle what the endpoints do.
+do: always prefer nouns over verbs in your APIs
+
+
+---------------NAMING COLLECTIONS----------------------------
+if you have an endpoint like DELETE /post/123, it is not good since it does not say that there could be other posts
+in the same collection
+an endpoint like DELETE /posts/123 is better since it tells the consumers that there could be other resources in the
+same collection
+do: you should always use the HTTP verbs to operate on the collections and elements 
+do: use concrete rather than abstract names
+do: better APIs use more of plural than singular
+
+---------------USING STATUS CODES IN ERROR HANDLING-------------
+always use HTTP error codes to tell the consumers of the API when something goes wrong, success or even 
+failure. or even more documentation to tell the developer how to resolve the issue.
+You should always account for these three situations;
+everything works - success
+the application did something wrong - client error
+the API did something wrong - server error
+
+------------USING PARTIAL SELECTION AND PAGINATION---------------------------
+sometimes an API's database can get really large, and if this happens then retrieving data can get really slow.
+you can use filtering, sorting and pagination on the collections.
+for example say you have a database of tags, an example of a filtered endpoint is: 
+GET /posts?tag="javascript"
+
+you should always use pagination so that you can give the developers what they want.
+for example, you can use the Google syntax below
+/dogs?fields=name,color,breed (a URL should not have spaces. Do not even be tempted.)
+
+-----------------------USE SSL FOR SECURITY----------------------------
+make your APIs secure
+
+-----------------BE CLEAR WITH THE VERSIONING OF YOUR API-------------------------
+REST APIs must have different versions, so you don't force your consumers to migrate to newer versions.
+we normally use the semantic system of versioning.
+it takes the form of x.y.z
+x- major version
+y- minor version
+z- patch versioning
+
+do: API versioning is a must and no API should lack a version.
+
+look at the API of Spotify
+GET /v1/artists/:artistID/albums
+notice the version number
+
+-------------PROVIDE API DOCUMENTATION---------------------
+you should always provide good documentation
+
+
+
+----------------------CHAPTER TWO: THE DIFFERENT API TYPES--------------------------------------
+----------------------SOURCE: PROGRAMMABLE WEB: part 6(YOUTUBE CHANNEL)---------------------------------
+
+the web/network API
+this is an API that is made available over the web/internet/network for anyone who wants to consume it.
+
+browser API
+these are APIs built into your browser that the developer can have access to.
+these APIs enable the applications that you build to run inside the browser to have access to the underlying 
+components on the system on which they run. for example, access to the camera, audio, battery status and many other 
+things
+
+standard API
+this is where the developers make an API according to a given standard that was set by either a body or a group
+of developers/organisation.
+
+//TODO
+//have a look at the Google Mobile Carrier Design API
+//what are the different architectural styles of APIs, for example 
+//what is SOA
+//REST, RPC, GraphQL, pub-sub and all that stuff.
+//what API style does web sockets use
+/how to design APIs for microservices
+//becoming a software creator instead of just a framework consumers
+//watch programmable web: part 7. what are some major reasons to launch an API
+//interact with a few APIs like the twitter API, the facebook API and many world class APIs to see how they are
+//implemented
+//using pagination and partial responses.
+//look at apigee
+//download the openAPI documentation guide. this is a good thing.
+//go to api.cookery.dev for more videos on APIs.
+//selling vs buying
+
+system/ embedded API
+these are APIs provided by developers to enable other developers to access some native hardware features on 
+their devices.
+
+THE SCOPE OF AN API,    why is it important
+SINGLE PURPOSE API
+it is your normal, functional API for your consumer to use
+
+AGGREGATE API
+this is where one API works for (can be used to access) all the different types of individual APIs 
+provided by different companies
+its more of abstracting away all the APIs into a single interface
+
+THE MICROSERVICE API 
+// read more
+
+
+----------------------CHAPTER THREE: WHAT IS THE OPEN API SPECIFICATION--------------------------------------
+roughly, this is a broadly adopted industry standard for describing modern APIs
+
+----------------------CHAPTER FOUR: WHAT IS THE API MANAGEMENT--------------------------------------
+this is the process of building, publishing, securing, versioning, observing, scaling, cataloging and 
+retiring APIs.
+
+
+
+
+
+
+
+
+

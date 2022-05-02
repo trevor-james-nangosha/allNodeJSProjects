@@ -13,12 +13,14 @@
     "api",
     "mongoose",
     "sessions",
-    "security"
+    "security",
+    "student"
   ],
   "author": "trevor-james-nangosha",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "webpack": "^5.72.0"
   },
   "dependencies": {
     "axios": "^0.26.1",

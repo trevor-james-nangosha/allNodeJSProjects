@@ -19,7 +19,6 @@ const studentSchema = new mongoose.Schema({
     dateStudentAccountCreated: {type: Date, default: Date.now},
     course: {type: mongoose.Schema.Types.ObjectId, ref: Course},
     telephoneNumber: String,
-
 })
 
 export default mongoose.model("Student", studentSchema);   
