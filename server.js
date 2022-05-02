@@ -9,21 +9,24 @@ import bcrypt from 'bcrypt'
 import { generateRegistrationNumber } from "./utilities/utilities.js";
 import { generateStudentNumber } from "./utilities/utilities.js";
 
-//TODO
-//how to set up ejs for template rendering
-//look at the mongoDB error codes and how to fix them
-//download the TODO VSCode extension
+//TODO;
+//implement the login functionality for the students using their student numbers and passwords
 
-//defining the consonants
+//DID YOU KNOW????
+//async functions that take a callback return a promise in case a callback is not specified
+//for example with the bcrypt compare api
+//this thing has given me a really hard time to figure out, but thanks to the bcrypt documentation,
+//i finally figured it out.
+
+//defining the consonants                  
 const app =  express();
 const port = process.env.PORT || 3000
 
 app.use(json())
 app.use(urlencoded())
-app.set('view engine', 'ejs');
 app.use(cors())
 app.use(session({
-    secret: "the sessions secret",
+    secret: "this is where you put whatever session secret that you want",
     store: MongoStore.create({
         mongoUrl: 'mongodb://localhost/sessionsDB',
         collection: 'sessions'
@@ -45,6 +48,7 @@ app.get('/', (req, res) => {
     }
 })
 
+//returns all students
 app.get('/v1/students', (req, res) => {
     if(req.session.isAuth){
         Student.find((error, students) => {
@@ -60,68 +64,37 @@ app.get('/v1/students', (req, res) => {
     
 }) 
 
-app.get('/v1/students/:studentID', (req, res) => {
-    Student.findOne(req.params, (error, student) => {
+
+app.post('/v1/login', async (req, res) => {
+    const {email, password} = req.body;
+    Student.findOne({email}, (error,student) => {
         if(!error){
             if(!student){
-                res.status(400).send("Student not found.....")
-            }else if(student){
-                res.json(student)
+                res.send("the student was not found........")
+            }else{
+                try {
+                    // bcrypt.compare(password, student.password, (error, result) => {
+                    //     console.log(result)
+                    // })    
+                    bcrypt.compare(password, student.password)
+                    .then(result => {
+                        if(result){
+                            req.session.isAuth = true
+                            res.redirect('/')
+                        }else{
+                            res.redirect('/v1/login')
+                        }
+                    })            
+                } catch (error) {
+                    res.send(error)
+                }
             }
-        }else if(error){
-            console.log(error)
+        }else{
+            res.send(error)
         }
     })
 })
 
-//an API to return the name of the course of a particular user
-app.get('/students/:studentID/course/:courseName', (req, res) => {
-    Student.findOne(req.params, (error, student) => {
-        if(!error){
-            if(!student){
-                res.status(400).send("Student not found.....")
-            }else if(student){
-                res.json(student)
-            }
-        }else if(error){
-            console.log(error)
-        }
-    })
-})
-
-const loginAuthenticatedUser = (req, res) => {
-    req.session.isAuth = true;
-    res.redirect('/')
-}
-
-const authenticateUser = (studentID, email) => {
-    const user = Student.findOne({studentID: studentID, email: email}, (error, student) => {
-        if(!error){
-            if(!student){
-                console.log("student not found....")
-            }else if(student){
-                console.log(student)
-            }
-        }else if(error){
-            console.log(error)
-        }
-    })
-    return user
-    //this thing is authenticating even for an empty database
-    //TODO
-    //fix that
-}
-
-app.get('/login', (req, res) => {
-    const details = provideLoginDetails("21-U-1519", "trevornangosha16@gmail.com")
-    const isValidUser = authenticateUser(details[0], details[1])
-    console.log(isValidUser)
-    if(isValidUser == undefined || isValidUser == false){
-        res.status(400).send("Invalid login details....")
-    }else{
-        loginAuthenticatedUser(req, res)
-    }
-})
 
 app.post('/v1/students', async (req, res) => {
     const {password, firstName, lastName, email} = req.body       
@@ -131,9 +104,9 @@ app.post('/v1/students', async (req, res) => {
             const newStudent = new Student({
                 studentNumber: generateStudentNumber(),
                 registrationNumber: generateRegistrationNumber(),
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
+                firstName,
+                lastName,
+                email,
                 password: hashedPassword
             })
             newStudent.save((error, student) => {
