@@ -1,5 +1,8 @@
-import mongoose from "mongoose"
-import Course from "./Course.js";
+// import mongoose from "mongoose"
+// import Course from "./Course.js";
+
+const mongoose = require('mongoose')
+const Course = require('./Course.js')
 
 const studentSchema = new mongoose.Schema({
     studentNumber: {type: String, required: true, unique: true},
@@ -21,4 +24,5 @@ const studentSchema = new mongoose.Schema({
     telephoneNumber: String,
 })
 
-export default mongoose.model("Student", studentSchema);   
+// export default mongoose.model("Student", studentSchema);   
+module.exports = mongoose.model('Student', studentSchema);

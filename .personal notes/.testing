@@ -1,0 +1,10 @@
+the importance of testing in nodeJS applications
+
+you do not need to test the components of the system that you did not write. assume that the 
+original authors of the system did the work of testing their system
+
+@packages to install
+@types/supertest -D(install as dev dependencies)
+
+we can test end to end from the route to the mongoDB, or you can test a single component like the middleware
+alone or anything else

@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+const mongoose = require('mongoose')
 const DB_URI = "mongodb://localhost/students"
 
 const connectDB =async () => {
@@ -12,4 +13,5 @@ const connectDB =async () => {
     }
 }
 
-export default connectDB;
+// export default connectDB;
+module.exports = connectDB;

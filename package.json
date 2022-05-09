@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "this is where i implement all the node ideas i get",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest server.js"
+    "test": "jest add.test.js --detectOpenHandles"
   },
   "keywords": [
     "node",
@@ -19,6 +18,8 @@
   "author": "trevor-james-nangosha",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^27.5.0",
+    "@types/supertest": "^2.0.12",
     "nodemon": "^2.0.15",
     "webpack": "^5.72.0"
   },

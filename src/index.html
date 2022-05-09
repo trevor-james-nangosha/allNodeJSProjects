@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/home/nangosha/PERSONAL PROJECTS/allNodeJSProjects/src/style.css">
     <title>MUK</title>
 </head>
 <body>
@@ -12,15 +12,14 @@
 
         <div id="main-header">
             <h1>MAKERERE UNIVERSITY</h1>
-            <h3>ENTER YOUR DETAILS BELOW</h3>
+            <h3>WELCOME DEAR USER</h3>
+            <h3>Fill in the details below to complete your profile</h3>
+
         </div>
 
         <div id="main-form">
-            <form method="POST" action="http://127.0.0.1:3000/form">
+            <form method="POST" action="http://127.0.0.1:3000/v1/students/details">
                 
-                <input type="text" name="firstName" required="true" placeholder="First name">    
-                <input type="text" name="lastName" required="true"  placeholder="Last name">
-                <input type="email" name="email" required="true"  placeholder="Email">
                 <input type="text" name="telephoneNumber" required="true"  placeholder="Telephone Number">
                 <input type="text" name="homeDistrict" required="true"  placeholder="Home District">
                 <input type="date" name="dateOfBirth" required="true"  placeholder="Date of Birth">
